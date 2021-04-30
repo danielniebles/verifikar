@@ -10,6 +10,29 @@ export function getOnboardingTotalSteps() {
   return onBoarding.totalSteps
 }
 
+export function getTaskList() {
+  return taskList
+}
+
+export const taskList = [
+  {
+    text: 'Guardar adjunto en carpeta',
+    bottomLabel: '0 tareas configuradas',
+    startIconUrl:
+      'https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/605f888657d00c6bf8055ca8_Drive.png',
+    endIconUrl:
+      'https://www.gstatic.com/images/icons/material/system/1x/keyboard_arrow_right_black_48dp.png',
+  },
+  {
+    text: 'Enviar email desde plantilla',
+    bottomLabel: 'Plan Premium',
+    startIconUrl:
+      'https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/605f88865c9d2b54d838ffa3_Gmail.png',
+    endIconUrl:
+      'https://www.gstatic.com/images/icons/material/system/1x/keyboard_arrow_right_black_48dp.png',
+  },
+]
+
 export const urls = [
   {
     key: 'welcome_screen_01',
@@ -152,13 +175,13 @@ export const onBoarding = {
         id: 'uuid-value',
         options: [
           {
-            name: 'Una chimba',
+            name: 'Proactivo',
             value: 'colombia',
             selected: false,
             id: 'uuid-value',
           },
           {
-            name: 'Normalito',
+            name: 'Responsable',
             value: 'mexico',
             selected: false,
             id: 'uuid-value',
@@ -245,7 +268,7 @@ export const onBoarding = {
         id: 'uuid-value',
         options: [
           {
-            name: 'Nada xd',
+            name: 'Registro de hojas de vida',
             value: 'other',
             selected: false,
             id: 'uuid-value',

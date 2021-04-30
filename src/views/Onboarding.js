@@ -13,7 +13,7 @@ export default class Onboarding extends View {
   get header() {
     return CardService.newCardHeader()
       .setTitle('Personaliza tu cuenta')
-      .setSubtitle(`Paso ${this.currentStep} de ${this.props.totalSteps}`)
+      .setSubtitle(`Paso ${this.currentStep} de 5`)
   }
 
   get sections() {
@@ -48,7 +48,8 @@ export default class Onboarding extends View {
       createButtonWidget({
         text: 'Continuar',
         styleType: 'FILLED',
-        actionName: 'nextOnboardingStep',
+        actionName:
+          this.currentStep !== '4' ? 'nextOnboardingStep' : 'loadTaskList',
         actionParams: { currentStep: this.currentStep },
       })
     )

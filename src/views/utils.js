@@ -1,3 +1,4 @@
+import { pickColor } from './Colors'
 export function createAction(actionName, actionParams) {
   return CardService.newAction()
     .setFunctionName(actionName)
@@ -26,7 +27,7 @@ export function createTextInputWidget({ title, name }) {
 
 export function createSelectionInputWidget({ title, name, type, options }) {
   let selectionInput = CardService.newSelectionInput()
-    .setFieldName(`${name}`)
+    .setFieldName(name)
     .setTitle(title)
 
   const finalType =
@@ -37,8 +38,42 @@ export function createSelectionInputWidget({ title, name, type, options }) {
       : CardService.SelectionInputType.CHECK_BOX
 
   selectionInput.setType(finalType)
-
   options.forEach((option) => selectionInput.addItem(option, option, false))
-
   return selectionInput
+}
+
+export function createDecoratedTextWidget({
+  text,
+  topLabel,
+  bottomLabel,
+  startIcon,
+  endIcon,
+}) {
+  const decoratedText = new CardService.newDecoratedText()
+
+  if (text) decoratedText.setText(text)
+  if (topLabel) decoratedText.setBottomLabel(topLabel)
+  if (bottomLabel) decoratedText.setBottomLabel(bottomLabel)
+  if (startIcon) decoratedText.setStartIcon(startIcon)
+  if (endIcon) decoratedText.setEndIcon(endIcon)
+
+  return decoratedText
+}
+
+export function createIconImageFromUrl({ url, type }) {
+  const finalType =
+    type === 'CIRCLE'
+      ? CardService.ImageCropType.CIRCLE
+      : CardService.ImageCropType.SQUARE
+  return new CardService.newIconImage()
+    .setIconUrl(url)
+    .setImageCropType(finalType)
+}
+
+export function getThemeColor() {
+  return pickColor('mainYellow')
+}
+
+export function colorString(string = '-', hexColor = '#000000') {
+  return `<font color="${hexColor}">${string}</font>`
 }
