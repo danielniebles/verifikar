@@ -30,3 +30,7 @@ export function nextOnboardingStep({
     formInputs,
   })
 }
+
+export function loadTaskList() {
+  return new controllers.TaskList().run()
+}
