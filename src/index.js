@@ -34,3 +34,12 @@ export function nextOnboardingStep({
 export function loadTaskList() {
   return new controllers.TaskList().run()
 }
+
+export function loadTask({ parameters: { id } }) {
+  console.log(id)
+  return new controllers.Drive().run()
+}
+
+export function loadNextDrive() {
+  console.log('next')
+}

@@ -48,14 +48,19 @@ export function createDecoratedTextWidget({
   bottomLabel,
   startIcon,
   endIcon,
+  action,
 }) {
   const decoratedText = new CardService.newDecoratedText()
 
   if (text) decoratedText.setText(text)
-  if (topLabel) decoratedText.setBottomLabel(topLabel)
+  if (topLabel) decoratedText.setTopLabel(topLabel)
   if (bottomLabel) decoratedText.setBottomLabel(bottomLabel)
   if (startIcon) decoratedText.setStartIcon(startIcon)
   if (endIcon) decoratedText.setEndIcon(endIcon)
+  if (action) {
+    const { actionName, actionParams } = action
+    decoratedText.setOnClickAction(createAction(actionName, actionParams))
+  }
 
   return decoratedText
 }

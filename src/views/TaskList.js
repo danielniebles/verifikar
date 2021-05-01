@@ -31,7 +31,7 @@ export default class TaskList extends View {
       colorString('Que tareas quieres configurar?', getThemeColor())
     )
 
-    tasksList.forEach(({ text, bottomLabel, startIconUrl, endIconUrl }) => {
+    tasksList.forEach(({ text, bottomLabel, startIconUrl, endIconUrl, id }) => {
       body.addWidget(
         createDecoratedTextWidget({
           text,
@@ -44,6 +44,10 @@ export default class TaskList extends View {
             url: endIconUrl,
             type: 'SQUARE',
           }),
+          action: {
+            actionName: 'loadTask',
+            actionParams: { id },
+          },
         })
       )
     })
