@@ -1,23 +1,20 @@
 import Controller from './Controller'
 import OnboardingView from '../views/Onboarding'
-import { getOnboardingTotalSteps } from '../model/resources'
 import OnboardingModel from '../model/Onboarding'
 import { getNavigationActionResponse } from './navigationHandler'
 import { userProperties } from '../common/properties'
 
 export default class Onboarding extends Controller {
-  execute({ currentStep, formInputs }) {
-    const questions = new OnboardingModel().getOnboardingQuestionsByStep(
+  execute({ step, formInputs }) {
+    const {
+      question,
       currentStep,
-      formInputs
-    )
-    const totalSteps = getOnboardingTotalSteps()
-    return new OnboardingView({ currentStep, totalSteps, questions })
+      totalSteps,
+    } = new OnboardingModel().getOnboardingQuestionsByStep(step, formInputs)
+    return new OnboardingView({ question, currentStep, totalSteps })
   }
   navigateTo(view) {
     const card = view.render()
-    return view.props.currentStep === '1'
-      ? card
-      : getNavigationActionResponse(card)
+    return view.props.step === '1' ? card : getNavigationActionResponse(card)
   }
 }

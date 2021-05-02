@@ -6,40 +6,22 @@ import {
 } from './utils'
 
 export default class Onboarding extends View {
-  get currentStep() {
-    return this.props.currentStep
+  get step() {
+    return this.props.currentStep.toString()
   }
 
   get header() {
     return CardService.newCardHeader()
       .setTitle('Personaliza tu cuenta')
-      .setSubtitle(`Paso ${this.currentStep} de 5`)
+      .setSubtitle(`Paso ${this.step} de ${this.props.totalSteps}`)
   }
 
   get sections() {
-    const { questions } = this.props
+    const { question } = this.props
     const finalSection = new CardService.newCardSection()
 
-    const widgets = questions.map((question) => {
-      if (question['type'] === 'text_input')
-        return createTextInputWidget({
-          title: question['question'],
-          name: question['name'],
-        })
-      if (question['type'] === 'list_unique_option')
-        return createSelectionInputWidget({
-          title: question['question'],
-          name: question['name'],
-          type: 'DROPDOWN',
-          options: question['options'].map((o) => o['name']),
-        })
-      if (question['type'] === 'list_multiple_option')
-        return createSelectionInputWidget({
-          title: question['question'],
-          name: question['name'],
-          type: 'CHECK_BOX',
-          options: question['options'].map((o) => o['name']),
-        })
+    const widgets = question.map(({ type, question, name, options }) => {
+      return this.createWidgetByType(type, question, name, options)
     })
 
     widgets.forEach((w) => finalSection.addWidget(w))
@@ -49,11 +31,41 @@ export default class Onboarding extends View {
         text: 'Continuar',
         styleType: 'FILLED',
         actionName:
-          this.currentStep !== '4' ? 'nextOnboardingStep' : 'loadTaskList',
-        actionParams: { currentStep: this.currentStep },
+          this.step !== this.props.totalSteps.toString()
+            ? 'nextOnboardingStep'
+            : 'loadTaskList',
+        actionParams: { step: this.step },
       })
     )
 
     return finalSection
+  }
+
+  createWidgetByType(type, question, name, options) {
+    const types = {
+      text_input: (question, name) => {
+        return createTextInputWidget({
+          title: question,
+          name: name,
+        })
+      },
+      list_unique_option: (question, name, options) => {
+        return createSelectionInputWidget({
+          title: question,
+          name: name,
+          type: 'DROPDOWN',
+          options: options.map(({ name }) => name),
+        })
+      },
+      list_multiple_option: (question, name, options) => {
+        return createSelectionInputWidget({
+          title: question,
+          name: name,
+          type: 'CHECK_BOX',
+          options: options.map(({ name }) => name),
+        })
+      },
+    }
+    return types[type](question, name, options)
   }
 }
