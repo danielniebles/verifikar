@@ -1,5 +1,5 @@
 import HttpClient from './HttpClient'
-import { onBoarding } from './resources'
+import { formatBackendUrl } from '../common/utils'
 import { userProperties } from '../common/properties'
 
 export default class Onboarding {
@@ -9,35 +9,32 @@ export default class Onboarding {
 
   getOnboardingQuestionsByStep(step, formAnswers) {
     const body = this.handleOnboardingRequest(step, formAnswers)
-    const questionsByStep = onBoarding.body.question.filter(
-      (item) => item['step'] === step
+    const url = formatBackendUrl('forms')
+    const response = this.httpClient.execute(url, body)
+
+    const { question, previousState, currentStep, totalSteps, id } = JSON.parse(
+      response.getContentText()
     )
 
-    if (!userProperties.get('onboardingDocumentId')) {
-      const id = onBoarding.body.documentId
-      userProperties.set('onboardingDocumentId', id)
-    }
-    userProperties.set('onBoardingQuestionsCache', questionsByStep)
-
-    const url = 'https://3c82036b8eef.ngrok.io/forms'
-    //const response = this.httpClient.execute(url, body)
-    console.log(JSON.stringify(body))
-    return questionsByStep
+    userProperties.set('onboardingDocumentId', id)
+    userProperties.set('previousQuestion', question)
+    return { question, currentStep, totalSteps }
   }
 
   buildAnsweredQuestion(questions, answers) {
-    const answeredQuestion = questions.map((question) => {
-      question['value'] = answers[`${question['name']}`]
-      return { id: question['id'], value: question['value'] }
+    const answeredQuestion = questions.map(({ id, name, value }) => {
+      value = answers[name]
+      return { id, value }
     })
     return answeredQuestion
   }
 
   handleOnboardingRequest(step, formAnswers) {
+    var user = Session.getActiveUser().getEmail()
     if (step === '1') {
       const payload = {
         name: 'onboarding_data',
-        user: 'jager.niebles@gmail.com',
+        user,
       }
       const body = {
         method: 'post',
@@ -45,15 +42,23 @@ export default class Onboarding {
       }
       return body
     } else {
-      const previousQuestion = userProperties.get('onBoardingQuestionsCache')
+      const previousQuestion = userProperties.get('previousQuestion')
       const documentId = userProperties.get('onboardingDocumentId')
       const answeredQuestion = this.buildAnsweredQuestion(
         previousQuestion,
         formAnswers
       )
+      const payload = {
+        name: 'onboarding_data',
+        user,
+        documentId,
+        answeredQuestion,
+      }
+
       const body = {
         method: 'patch',
-        payload: { documentId, answeredQuestion },
+        contentType: 'application/json',
+        payload: JSON.stringify(payload),
       }
       return body
     }
