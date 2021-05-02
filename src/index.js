@@ -15,18 +15,21 @@ export function nextSlide({ parameters: { currentStep } }) {
   return new controllers.WelcomeScreen().run(nextStep.toString())
 }
 
-export function loadOnboarding() {
-  var currentStep = '1'
-  return new controllers.Onboarding().run({ currentStep })
+export function loadOnboarding(e) {
+  var step = '1'
+  console.log(e)
+  return new controllers.Onboarding().run({ step })
 }
 
-export function nextOnboardingStep({
-  formInputs,
-  parameters: { currentStep },
-}) {
-  const nextStep = parseInt(currentStep) + 1
+export function nextOnboardingStep(e) {
+  console.log(e)
+  const {
+    formInputs,
+    parameters: { step },
+  } = e
+  const nextStep = parseInt(step) + 1
   return new controllers.Onboarding().run({
-    currentStep: nextStep.toString(),
+    step: nextStep.toString(),
     formInputs,
   })
 }

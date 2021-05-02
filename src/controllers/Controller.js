@@ -3,7 +3,6 @@ export default class Controller {
     this.event = event
   }
   run(args) {
-    console.log(args)
     return this.navigateTo(this.execute(args))
   }
 }
