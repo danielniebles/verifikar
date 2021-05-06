@@ -5,8 +5,12 @@ export function createAction(actionName, actionParams) {
     .setParameters(actionParams)
 }
 
-export function createButtonWidget(params) {
-  const { text, styleType, actionName, actionParams } = params
+export function createButtonWidget({
+  text,
+  styleType,
+  actionName,
+  actionParams,
+}) {
   const style =
     styleType === 'TEXT'
       ? CardService.TextButtonStyle.TEXT
@@ -21,8 +25,12 @@ export function createImageWidget({ url }) {
   return CardService.newImage().setImageUrl(url)
 }
 
-export function createTextInputWidget({ title, name }) {
-  return CardService.newTextInput().setFieldName(`${name}`).setTitle(title)
+export function createTextInputWidget({ title, name, value }) {
+  const textInput = CardService.newTextInput()
+    .setFieldName(name)
+    .setTitle(title)
+  if (value) textInput.setValue(value)
+  return textInput
 }
 
 export function createSelectionInputWidget({ title, name, type, options }) {
@@ -49,6 +57,7 @@ export function createDecoratedTextWidget({
   startIcon,
   endIcon,
   action,
+  button,
 }) {
   const decoratedText = new CardService.newDecoratedText()
 
@@ -61,6 +70,7 @@ export function createDecoratedTextWidget({
     const { actionName, actionParams } = action
     decoratedText.setOnClickAction(createAction(actionName, actionParams))
   }
+  if (button) decoratedText.setButton(button)
 
   return decoratedText
 }

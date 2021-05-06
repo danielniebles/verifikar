@@ -2,7 +2,7 @@ import 'core-js'
 import controllers from './controllers'
 
 export function onContext(event) {
-  return new controllers.SignUp({ event }).run()
+  return new controllers.TasksHome().run(event)
 }
 
 export function onInbox(event) {
@@ -15,18 +15,12 @@ export function nextSlide({ parameters: { currentStep } }) {
   return new controllers.WelcomeScreen().run(nextStep.toString())
 }
 
-export function loadOnboarding(e) {
+export function loadOnboarding() {
   var step = '1'
-  console.log(e)
   return new controllers.Onboarding().run({ step })
 }
 
-export function nextOnboardingStep(e) {
-  console.log(e)
-  const {
-    formInputs,
-    parameters: { step },
-  } = e
+export function nextOnboardingStep({ formInputs, parameters: { step } }) {
   const nextStep = parseInt(step) + 1
   return new controllers.Onboarding().run({
     step: nextStep.toString(),
@@ -34,15 +28,37 @@ export function nextOnboardingStep(e) {
   })
 }
 
-export function loadTaskList() {
-  return new controllers.TaskList().run()
+export function loadTasksConfigList() {
+  return new controllers.TaskConfigList().run()
 }
 
-export function loadTask({ parameters: { id } }) {
-  console.log(id)
-  return new controllers.Drive().run()
+export function loadTaskConfiguration({ parameters: { id } }) {
+  return new controllers.Drive().run({ id })
 }
 
+//This function comes from Cancel button in task configuration
 export function loadNextDrive() {
   console.log('next')
+}
+
+export function continueToDriveFolders({ formInputs }) {
+  return new controllers.FolderList().run({ formInputs })
+}
+
+export function onDriveFolderSelected({
+  parameters: { folderName, folderId },
+}) {
+  return new controllers.Drive().run({ folderName, folderId })
+}
+
+export function saveTask({
+  formInputs,
+  parameters: { taskId, folderName, folderId },
+}) {
+  return new controllers.OnSavedTask().run({
+    formInputs,
+    folderName,
+    folderId,
+    taskId,
+  })
 }

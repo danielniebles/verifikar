@@ -11,6 +11,10 @@ class CacheablePropertiesService {
     this.cache.put(key, json)
     this.properties.setProperty(key, json)
   }
+  remove(key) {
+    this.cache.remove(key)
+    this.properties.deleteProperty(key)
+  }
 }
 
 export const userProperties = new CacheablePropertiesService(

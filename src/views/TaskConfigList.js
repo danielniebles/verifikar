@@ -7,7 +7,7 @@ import {
 } from './utils'
 import { getTaskList } from '../model/resources'
 
-export default class TaskList extends View {
+export default class TaskConfigList extends View {
   get header() {
     return CardService.newCardHeader().setTitle(' ')
   }
@@ -15,7 +15,7 @@ export default class TaskList extends View {
   get sections() {
     const mainHeader = new CardService.newCardSection().addWidget(
       createDecoratedTextWidget({
-        text: '0 de 100 tareas usadas',
+        text: colorString('0 de 100 tareas usadas', getThemeColor()),
         bottomLabel: 'Plan gratis',
         startIcon: createIconImageFromUrl({
           url:
@@ -45,7 +45,7 @@ export default class TaskList extends View {
             type: 'SQUARE',
           }),
           action: {
-            actionName: 'loadTask',
+            actionName: 'loadTaskConfiguration',
             actionParams: { id },
           },
         })

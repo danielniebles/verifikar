@@ -1,4 +1,4 @@
-const backendUrl = 'http://163385598a16.ngrok.io'
+const backendUrl = 'http://725036bf626f.ngrok.io'
 
 export function formatBackendUrl(pathname) {
   return `${backendUrl}/${pathname}`
