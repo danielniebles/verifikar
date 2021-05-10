@@ -2,7 +2,7 @@ import 'core-js'
 import controllers from './controllers'
 
 export function onContext(event) {
-  return new controllers.TasksHome().run(event)
+  return new controllers.TasksHome({ event }).run()
 }
 
 export function onInbox(event) {
@@ -61,4 +61,12 @@ export function saveTask({
     folderId,
     taskId,
   })
+}
+
+export function loadAttachmentList(event) {
+  return new controllers.AttachmentsList({ event }).run()
+}
+
+export function submitDriveTask(event) {
+  return new controllers.OnSelectedAttachments({ event }).run()
 }

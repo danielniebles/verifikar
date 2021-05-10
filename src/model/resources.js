@@ -22,7 +22,7 @@ export const taskList = [
       'https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/605f888657d00c6bf8055ca8_Drive.png',
     endIconUrl:
       'https://www.gstatic.com/images/icons/material/system/1x/keyboard_arrow_right_black_48dp.png',
-    id: 'google_drive_task',
+    taskId: 'drive_save_attachament',
   },
   {
     text: 'Enviar email desde plantilla',
@@ -31,7 +31,7 @@ export const taskList = [
       'https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/605f88865c9d2b54d838ffa3_Gmail.png',
     endIconUrl:
       'https://www.gstatic.com/images/icons/material/system/1x/keyboard_arrow_right_black_48dp.png',
-    id: 'gmail_compose_task',
+    taskId: 'gmail_compose_task',
   },
 ]
 

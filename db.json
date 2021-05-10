@@ -2,21 +2,54 @@
   "tasklist": [
     {
       "taskName": [
-        "Tarea de Maria la fea"
+        "Guardar candidatos"
       ],
       "taskId": "google_drive_task",
-      "folderName": "Musica",
-      "folderId": "1rDyMWhhRDM8leUy1p_iDl25lxPcKnMwa",
+      "folderName": "Verifikar_2",
+      "folderId": "1yiSIf35miqZUTl62D2l6FZd5XpGK8ULU",
       "id": 1
-    },
-    {
-      "taskName": [
-        "Tarea de Daniel"
-      ],
-      "taskId": "google_drive_task",
-      "folderName": "Hedex",
-      "folderId": "1tr0Jl01FeGiOZaR6A9jkKMFlR97F4IE9",
-      "id": 2
     }
-  ]
+  ],
+
+  "tasks": 
+      {
+      "variables": [
+        {
+          "question": "Nombre de la tarea",
+          "variableName": "taskName",
+          "visible": true,
+          "resource": "",
+          "type": "text_input",
+          "value": null,
+          "id": "uuid-value"
+        },
+        {
+          "question": "Selecciona una carpeta",
+          "varibleName": "folderName",
+          "visible": true,
+          "resource": "",
+          "type": "decorated_text",
+          "widget": {
+            "topLabel":"Carpeta google drive",
+            "text":"Selecciona una carpeta",
+            "resource":"link flechita"
+          },
+          "value": "",
+          "id": "uuid-value"
+        },
+        {
+          "question": "Folder id",
+          "variableName": "folderId",
+          "visible": false,
+          "resource": "",
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "name": "drive_save_attachament",
+      "displayName": "Guardar adjunto en carpeta",
+      "displayUrl":"",
+      "createdBy": "diego@verifikar.com"
+    }
+  
 }

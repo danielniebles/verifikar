@@ -1,16 +1,16 @@
 import Controller from '../Controller'
 import DriveView from '../../views/tasks/Drive'
+import DriveModel from '../../model/Drive'
 import { getNavigationActionResponse } from '../navigationHandler'
 import { userProperties } from '../../common/properties'
 
 export default class Drive extends Controller {
   execute({ id, folderName, folderId }) {
+    //const { parameters: taskId } = this.event
     const taskId = id
       ? userProperties.set('currentConfigTaskId', id)
       : userProperties.get('currentConfigTaskId')
-    const taskName = userProperties.get('currentConfigTaskName')
-      ? userProperties.get('currentConfigTaskName')
-      : ''
+    const taskName = userProperties.get('currentConfigTaskName') ?? ''
     return new DriveView({ taskName, taskId, folderName, folderId })
   }
 

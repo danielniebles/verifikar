@@ -31,26 +31,28 @@ export default class TaskConfigList extends View {
       colorString('Que tareas quieres configurar?', getThemeColor())
     )
 
-    tasksList.forEach(({ text, bottomLabel, startIconUrl, endIconUrl, id }) => {
-      body.addWidget(
-        createDecoratedTextWidget({
-          text,
-          bottomLabel,
-          startIcon: createIconImageFromUrl({
-            url: startIconUrl,
-            type: 'SQUARE',
-          }),
-          endIcon: createIconImageFromUrl({
-            url: endIconUrl,
-            type: 'SQUARE',
-          }),
-          action: {
-            actionName: 'loadTaskConfiguration',
-            actionParams: { id },
-          },
-        })
-      )
-    })
+    tasksList.forEach(
+      ({ text, bottomLabel, startIconUrl, endIconUrl, taskId }) => {
+        body.addWidget(
+          createDecoratedTextWidget({
+            text,
+            bottomLabel,
+            startIcon: createIconImageFromUrl({
+              url: startIconUrl,
+              type: 'SQUARE',
+            }),
+            endIcon: createIconImageFromUrl({
+              url: endIconUrl,
+              type: 'SQUARE',
+            }),
+            action: {
+              actionName: 'loadTaskConfiguration',
+              actionParams: { taskId },
+            },
+          })
+        )
+      }
+    )
     return [mainHeader, body]
   }
 }

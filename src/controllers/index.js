@@ -6,6 +6,8 @@ import Drive from './tasks/Drive'
 import FolderList from './tasks/FolderList'
 import OnSavedTask from './tasks/OnSavedTask'
 import TasksHome from './TasksHome'
+import AttachmentsList from './AttachmentsList'
+import OnSelectedAttachments from './OnSelectedAttachments'
 
 export default {
   SignUp,
@@ -16,4 +18,6 @@ export default {
   FolderList,
   OnSavedTask,
   TasksHome,
+  AttachmentsList,
+  OnSelectedAttachments,
 }
