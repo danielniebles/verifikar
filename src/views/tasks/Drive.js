@@ -8,29 +8,60 @@ import {
 
 export default class Drive extends View {
   get header() {
+    const { displayName } = this.props.taskTemplate
     return CardService.newCardHeader()
-      .setTitle('Guardar adjunto en carpeta')
+      .setTitle(displayName)
       .setSubtitle('Configuracion')
   }
 
   get sections() {
     const section = new CardService.newCardSection()
-      .addWidget(
-        createTextInputWidget({
-          title: 'Nombre de la tarea',
-          name: 'task_name',
+    const { variables } = this.props.taskTemplate
+
+    const variablesToRender = variables.filter(
+      (variable) => variable['visible'] === true
+    )
+
+    const widgets = variablesToRender.map((variable) => {
+      return this.createTaskWidgetByType(variable)
+    })
+
+    widgets.forEach((w) => section.addWidget(w))
+
+    section.addWidget(
+      createButtonWidget({
+        text: this.props.folderName ? 'Guardar' : 'Cancelar',
+        styleType: 'FILLED',
+        actionName: this.props.folderName ? 'saveTask' : 'loadNextDrive',
+        actionParams: this.props.folderName
+          ? {
+              folderName: this.props.folderName,
+              folderId: this.props.folderId,
+            }
+          : {},
+      })
+    )
+    return section
+  }
+
+  createTaskWidgetByType({ type, question, variableName, widget }) {
+    const types = {
+      text_input: ({ question, variableName }) => {
+        return createTextInputWidget({
+          title: question,
+          name: variableName,
           value: this.props.taskName ? this.props.taskName : '',
         })
-      )
-      .addWidget(
-        createDecoratedTextWidget({
+      },
+      decorated_text: ({ widget }) => {
+        const { topLabel, text, resource } = widget
+        return createDecoratedTextWidget({
           text: this.props.folderName
             ? `<b>${this.props.folderName}</b>`
-            : 'Seleccionar Carpeta',
-          topLabel: 'Carpeta Google Drive',
+            : text,
+          topLabel: topLabel,
           endIcon: createIconImageFromUrl({
-            url:
-              'https://www.gstatic.com/images/icons/material/system/1x/keyboard_arrow_right_black_48dp.png',
+            url: resource,
             type: 'SQUARE',
           }),
           action: {
@@ -38,21 +69,8 @@ export default class Drive extends View {
             actionParams: {},
           },
         })
-      )
-      .addWidget(
-        createButtonWidget({
-          text: this.props.folderName ? 'Guardar' : 'Cancelar',
-          styleType: 'FILLED',
-          actionName: this.props.folderName ? 'saveTask' : 'loadNextDrive',
-          actionParams: this.props.folderName
-            ? {
-                folderName: this.props.folderName,
-                folderId: this.props.folderId,
-                taskId: this.props.taskId,
-              }
-            : {},
-        })
-      )
-    return section
+      },
+    }
+    return types[type]({ question, variableName, widget })
   }
 }

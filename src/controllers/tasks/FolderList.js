@@ -4,9 +4,11 @@ import DriveModel from '../../model/Drive'
 import { userProperties } from '../../common/properties'
 
 export default class FolderList extends Controller {
-  execute({ formInputs }) {
-    const taskName = formInputs['task_name'][0]
-    userProperties.set('currentConfigTaskName', taskName)
+  execute() {
+    const {
+      formInputs: { taskName },
+    } = this.event
+    taskName ? userProperties.set('currentConfigTaskName', taskName[0]) : ''
     const folders = new DriveModel().getFolderList()
     return new FolderListView({ folders })
   }

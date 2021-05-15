@@ -7,14 +7,42 @@ export default class Drive {
     this.httpClient = new HttpClient()
   }
 
-  getTaskTemplate() {
-    const url = formatBackendUrl('taskconfig')
+  getTaskTemplate(taskId) {
+    const url = formatBackendUrl(`tasks/configuration/${taskId}`)
     const response = this.httpClient.execute(url)
-    return response.getContentText()
+    console.log(response)
+    return JSON.parse(response.getContentText())
   }
 
   getFolderById(folderId) {
     return DriveApp.getFolderById(folderId)
+  }
+
+  createTask(inputVariables, answers) {
+    var user = Session.getActiveUser().getEmail()
+    const variables = this.buildFilledTemplate(inputVariables, answers)
+    const taskId = userProperties.get('currentTaskId')
+    const url = formatBackendUrl(`tasks`)
+    const payload = {
+      name: taskId,
+      user,
+      variables,
+    }
+    const body = {
+      method: 'post',
+      contentType: 'application/json',
+      payload: JSON.stringify(payload),
+    }
+    const response = this.httpClient.execute(url, body)
+    return response.getContentText()
+  }
+
+  buildFilledTemplate(variables, answers) {
+    const filledTemplate = variables.map((variable) => {
+      variable['value'] = answers[variable['variableName']]
+      return variable
+    })
+    return filledTemplate
   }
 
   getFolderList() {

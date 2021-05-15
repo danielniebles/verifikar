@@ -7,13 +7,11 @@ import { userProperties } from '../common/properties'
 
 export default class Onboarding extends Controller {
   execute({ step, formInputs }) {
-    // const {
-    //   question,
-    //   currentStep,
-    //   totalSteps,
-    // } = new OnboardingModel().getOnboardingQuestionsByStep(step, formInputs)
+    userProperties.remove('currentTaskTemplate')
+    userProperties.remove('currentConfigTaskName')
 
-    const currentStep = '4'
+    const { question, currentStep, totalSteps } =
+      new OnboardingModel().getOnboardingQuestionsByStep(step, formInputs)
 
     return currentStep.toString() !== '4'
       ? new OnboardingView({ question, currentStep, totalSteps })

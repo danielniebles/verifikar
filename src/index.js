@@ -32,8 +32,8 @@ export function loadTasksConfigList() {
   return new controllers.TaskConfigList().run()
 }
 
-export function loadTaskConfiguration({ parameters: { id } }) {
-  return new controllers.Drive().run({ id })
+export function loadTaskConfiguration(event) {
+  return new controllers.Drive({ event }).run()
 }
 
 //This function comes from Cancel button in task configuration
@@ -41,26 +41,16 @@ export function loadNextDrive() {
   console.log('next')
 }
 
-export function continueToDriveFolders({ formInputs }) {
-  return new controllers.FolderList().run({ formInputs })
+export function continueToDriveFolders(event) {
+  return new controllers.FolderList({ event }).run()
 }
 
-export function onDriveFolderSelected({
-  parameters: { folderName, folderId },
-}) {
-  return new controllers.Drive().run({ folderName, folderId })
+export function onDriveFolderSelected(event) {
+  return new controllers.Drive({ event }).run()
 }
 
-export function saveTask({
-  formInputs,
-  parameters: { taskId, folderName, folderId },
-}) {
-  return new controllers.OnSavedTask().run({
-    formInputs,
-    folderName,
-    folderId,
-    taskId,
-  })
+export function saveTask(event) {
+  return new controllers.OnSavedTask({ event }).run()
 }
 
 export function loadAttachmentList(event) {

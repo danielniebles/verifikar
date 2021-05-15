@@ -5,13 +5,25 @@ import { getNavigationActionResponse } from '../navigationHandler'
 import { userProperties } from '../../common/properties'
 
 export default class Drive extends Controller {
-  execute({ id, folderName, folderId }) {
-    //const { parameters: taskId } = this.event
-    const taskId = id
-      ? userProperties.set('currentConfigTaskId', id)
-      : userProperties.get('currentConfigTaskId')
-    const taskName = userProperties.get('currentConfigTaskName') ?? ''
-    return new DriveView({ taskName, taskId, folderName, folderId })
+  execute() {
+    const { parameters } = this.event
+    const { taskId, folderName, folderId } = parameters
+
+    const taskName = userProperties.get('currentConfigTaskName')
+    let taskTemplate = userProperties.get('currentTaskTemplate')
+
+    if (!taskTemplate) {
+      taskTemplate = new DriveModel().getTaskTemplate(taskId)
+      userProperties.set('currentTaskTemplate', taskTemplate)
+      userProperties.set('currentTaskId', taskId)
+    }
+
+    return new DriveView({
+      taskName,
+      folderName,
+      folderId,
+      taskTemplate,
+    })
   }
 
   navigateTo(view) {

@@ -25,16 +25,16 @@
         },
         {
           "question": "Selecciona una carpeta",
-          "varibleName": "folderName",
+          "variableName": "folderName",
           "visible": true,
           "resource": "",
           "type": "decorated_text",
+          "value": "",
           "widget": {
             "topLabel":"Carpeta google drive",
             "text":"Selecciona una carpeta",
-            "resource":"link flechita"
+            "resource": "https://www.gstatic.com/images/icons/material/system/1x/keyboard_arrow_right_black_48dp.png"
           },
-          "value": "",
           "id": "uuid-value"
         },
         {

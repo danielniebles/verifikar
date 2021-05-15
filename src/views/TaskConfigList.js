@@ -18,8 +18,7 @@ export default class TaskConfigList extends View {
         text: colorString('0 de 100 tareas usadas', getThemeColor()),
         bottomLabel: 'Plan gratis',
         startIcon: createIconImageFromUrl({
-          url:
-            'https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/605f888657d00c6bf8055ca8_Drive.png',
+          url: 'https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/6095c57917701c0154548e5b_time-icon.png',
           type: 'CIRCLE',
         }),
       })
