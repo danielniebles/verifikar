@@ -10,11 +10,6 @@ export default class TasksHome extends Controller {
     const subject = message.getSubject()
     const sender = message.getFrom()
     const tasksList = new TasksHomeModel().getTasks()
-    // const attachments = message.getAttachments()
-    // const folder = new Drive().getFolderById(
-    //   '1FpjMkWbb1mf5O6O-sci1NrbvkDiRpS30'
-    // )
-    // attachments.forEach((attachment) => folder.createFile(attachment))
     return new TasksHomeView({ subject, sender, tasksList })
   }
   navigateTo(view) {

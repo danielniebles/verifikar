@@ -83,7 +83,6 @@ export function createDecoratedTextWidget({
     decoratedText.setOnClickAction(createAction(actionName, actionParams))
   }
   if (button) decoratedText.setButton(button)
-
   return decoratedText
 }
 

@@ -3,6 +3,8 @@ import {
   createImageWidget,
   createButtonWidget,
   createDecoratedTextWidget,
+  colorString,
+  getThemeColor,
 } from './utils'
 
 export default class OnSavedTask extends View {
@@ -14,8 +16,12 @@ export default class OnSavedTask extends View {
     const section = new CardService.newCardSection()
       .addWidget(
         createImageWidget({
-          url:
-            'https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/605b51072dc3d843cbf78424_Para-consultora-.png',
+          url: 'https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/6095c5a817701c04ab548ef3_robot-success.png',
+        })
+      )
+      .addWidget(
+        createDecoratedTextWidget({
+          text: colorString('¡Hooray! Tarea ejecutada.', getThemeColor()),
         })
       )
       .addWidget(

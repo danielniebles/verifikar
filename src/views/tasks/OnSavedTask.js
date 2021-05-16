@@ -1,5 +1,11 @@
 import View from '../View'
-import { createImageWidget, createButtonWidget } from '../utils'
+import {
+  createImageWidget,
+  createButtonWidget,
+  createDecoratedTextWidget,
+  colorString,
+  getThemeColor,
+} from '../utils'
 
 export default class OnSavedTask extends View {
   get header() {
@@ -7,12 +13,20 @@ export default class OnSavedTask extends View {
   }
 
   get sections() {
-    const section = new CardService.newCardSection().addWidget(
-      createImageWidget({
-        url:
-          'https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/605b51072dc3d843cbf78424_Para-consultora-.png',
-      })
-    )
+    const section = new CardService.newCardSection()
+      .addWidget(
+        createImageWidget({
+          url: 'https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/605b36484b644d06fbb7c6ba_pieza_excelente-tu-tarea-p-500.png',
+        })
+      )
+      .addWidget(
+        createDecoratedTextWidget({
+          text: colorString(
+            '<b>Excelente! Tu tarea ha sido configurada.</b>',
+            getThemeColor()
+          ),
+        })
+      )
 
     return section
   }

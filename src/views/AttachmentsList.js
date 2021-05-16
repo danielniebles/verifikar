@@ -8,16 +8,15 @@ import {
 export default class AttachmentsList extends View {
   get header() {
     const { parameters } = this.props
-    const { fixedTaskName } = parameters
+    const { taskName, displayName } = parameters
     return CardService.newCardHeader()
-      .setTitle(`<b>${fixedTaskName}</b>`)
-      .setSubtitle('Guardar adjunto en carpeta')
+      .setTitle(`<b>${taskName}</b>`)
+      .setSubtitle(displayName)
   }
 
   get sections() {
     const section = new CardService.newCardSection()
-    const { parameters, attachments } = this.props
-    const { folderId } = parameters
+    const { attachments, folderId } = this.props
 
     section.addWidget(
       createSelectionInputWidget({

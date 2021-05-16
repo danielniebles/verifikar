@@ -1,15 +1,32 @@
 {
-  "tasklist": [
+  "tasksworkspace": [
     {
-      "taskName": [
-        "Guardar candidatos"
-      ],
-      "taskId": "google_drive_task",
-      "folderName": "Verifikar_2",
-      "folderId": "1yiSIf35miqZUTl62D2l6FZd5XpGK8ULU",
-      "id": 1
+      "taskName":"Guardar candidatos",
+      "iconUrl": "https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/605f888657d00c6bf8055ca8_Drive.png",
+      "displayName": "Guardar adjunto en carpeta",
+      "name": "drive_save_attachament",
+      "id": "12345"
+    },
+    {
+      "taskName":"Guardar candidatos 2",
+      "iconUrl": "https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/605f888657d00c6bf8055ca8_Drive.png",
+      "displayName": "Guardar adjunto en carpeta",
+      "name": "drive_save_attachament",
+      "id": "1234"
     }
+
   ],
+
+  "tasksId": {
+    "id":"1234",
+    "name":"drive_save_attachament",
+    "displayName":"Guardar adjunto en carpeta",
+    "taskName":"Guardar candidatos",
+    "parameters":{
+       "folderName":"folder del perrito",
+       "folderId":"1yiSIf35miqZUTl62D2l6FZd5XpGK8ULU"
+    }
+ },
 
   "tasks": 
       {

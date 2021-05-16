@@ -25,6 +25,7 @@ export default class Drive {
     const url = formatBackendUrl(`tasks`)
     const payload = {
       name: taskId,
+      workspace: 'gmail',
       user,
       variables,
     }

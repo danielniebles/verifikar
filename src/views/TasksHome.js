@@ -17,17 +17,14 @@ export default class TasksHome extends View {
     const section = new CardService.newCardSection()
 
     tasksList.forEach((task) => {
-      // This is required to sent correct task name to AttachmentsList
-      const { taskName, folderName, folderId, taskId } = task
-      const fixedTaskName = taskName[0]
+      const { taskName, iconUrl, displayName, name, id } = task
 
       section.addWidget(
         createDecoratedTextWidget({
-          text: taskName[0],
-          bottomLabel: 'Guardar adjunto en Carpeta',
+          text: taskName,
+          bottomLabel: displayName,
           startIcon: createIconImageFromUrl({
-            url:
-              'https://uploads-ssl.webflow.com/5ea8c50bafc9df682df20c64/605f888657d00c6bf8055ca8_Drive.png',
+            url: iconUrl,
             type: 'SQUARE',
           }),
           endIcon: createIconImage({
@@ -36,7 +33,7 @@ export default class TasksHome extends View {
           }),
           action: {
             actionName: 'loadAttachmentList',
-            actionParams: { fixedTaskName, folderName, folderId, taskId },
+            actionParams: { taskName, displayName, name, id },
           },
         })
       )

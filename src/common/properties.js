@@ -12,7 +12,6 @@ class CacheablePropertiesService {
     this.properties.setProperty(key, json)
   }
   remove(key) {
-    console.log('remove called')
     this.cache.remove(key)
     this.properties.deleteProperty(key)
   }

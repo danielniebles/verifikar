@@ -7,8 +7,8 @@ import { userProperties } from '../../common/properties'
 export default class Drive extends Controller {
   execute() {
     const { parameters } = this.event
-    const { taskId, folderName, folderId } = parameters
-
+    const { name, folderName, folderId } = parameters
+    const taskId = name
     const taskName = userProperties.get('currentConfigTaskName')
     let taskTemplate = userProperties.get('currentTaskTemplate')
 
