@@ -18,6 +18,17 @@ export default class Drive {
     return DriveApp.getFolderById(folderId)
   }
 
+  getFoldersByName(folderName) {
+    var folders = DriveApp.getFoldersByName(folderName)
+    const foldersArray = []
+    while (folders.hasNext()) {
+      var folder = folders.next()
+      console.log(folder.getName())
+      foldersArray.push(folder)
+    }
+    return foldersArray.slice(0, 5)
+  }
+
   createTask(inputVariables, answers) {
     var user = Session.getActiveUser().getEmail()
     const variables = this.buildFilledTemplate(inputVariables, answers)

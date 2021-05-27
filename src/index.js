@@ -1,5 +1,6 @@
 import 'core-js'
 import controllers from './controllers'
+import * as constant from './views/Constants'
 
 export function onContext(event) {
   return new controllers.TasksHome({ event }).run()
@@ -33,7 +34,15 @@ export function loadTasksConfigList() {
 }
 
 export function loadTaskConfiguration(event) {
-  return new controllers.Drive({ event }).run()
+  const {
+    parameters: { name },
+  } = event
+  if (name === constant.DRIVE_TASK_NAME) {
+    return new controllers.Drive({ event }).run()
+  }
+  if (name === constant.GMAIL_COMPOSE_TASK_NAME) {
+    return new controllers.GmailCompose({ event }).run()
+  }
 }
 
 //This function comes from Cancel button in task configuration
@@ -59,4 +68,8 @@ export function loadAttachmentList(event) {
 
 export function submitDriveTask(event) {
   return new controllers.OnSelectedAttachments({ event }).run()
+}
+
+export function test(event) {
+  return new controllers.FolderList({ event }).run()
 }

@@ -23,25 +23,38 @@ export default class FolderList extends View {
       createTextInputWidget({
         title: 'Buscar',
         name: 'search',
+        value: this.props.search ?? '',
+        action: {
+          actionName: 'test',
+          actionParams: {},
+        },
       })
     )
 
-    this.folders.forEach((folder) => {
+    if (this.folders.length > 0) {
+      this.folders.forEach((folder) => {
+        section.addWidget(
+          createDecoratedTextWidget({
+            text: folder.getName(),
+            button: createButtonWidget({
+              text: 'Seleccionar',
+              styleType: 'TEXT',
+              actionName: 'onDriveFolderSelected',
+              actionParams: {
+                folderName: folder.getName(),
+                folderId: folder.getId(),
+              },
+            }),
+          })
+        )
+      })
+    } else {
       section.addWidget(
         createDecoratedTextWidget({
-          text: folder.getName(),
-          button: createButtonWidget({
-            text: 'Seleccionar',
-            styleType: 'TEXT',
-            actionName: 'onDriveFolderSelected',
-            actionParams: {
-              folderName: folder.getName(),
-              folderId: folder.getId(),
-            },
-          }),
+          text: 'Lo siento, no se encontró ninguna carpeta con ese nombre',
         })
       )
-    })
+    }
 
     return section
   }

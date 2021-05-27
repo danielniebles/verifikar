@@ -1,4 +1,5 @@
 import { pickColor } from './Colors'
+
 export function createAction(actionName, actionParams) {
   return CardService.newAction()
     .setFunctionName(actionName)
@@ -37,11 +38,22 @@ export function createImageWidget({ url }) {
   return CardService.newImage().setImageUrl(url)
 }
 
-export function createTextInputWidget({ title, name, value }) {
+export function createTextInputWidget({
+  title,
+  name,
+  value,
+  action,
+  multiline,
+}) {
   const textInput = CardService.newTextInput()
     .setFieldName(name)
     .setTitle(title)
   if (value) textInput.setValue(value)
+  if (action) {
+    const { actionName, actionParams } = action
+    textInput.setOnChangeAction(createAction(actionName, actionParams))
+  }
+  if (multiline) textInput.setMultiline(true)
   return textInput
 }
 

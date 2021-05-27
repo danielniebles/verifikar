@@ -8,6 +8,7 @@ import OnSavedTask from './tasks/OnSavedTask'
 import TasksHome from './TasksHome'
 import AttachmentsList from './AttachmentsList'
 import OnSelectedAttachments from './OnSelectedAttachments'
+import GmailCompose from './compose/GmailCompose'
 
 export default {
   SignUp,
@@ -20,4 +21,5 @@ export default {
   TasksHome,
   AttachmentsList,
   OnSelectedAttachments,
+  GmailCompose,
 }

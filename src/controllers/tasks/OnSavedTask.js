@@ -6,11 +6,14 @@ import OnSavedTaskModel from '../../model/OnSavedTask'
 
 export default class OnSavedTask extends Controller {
   execute() {
-    const taskName = userProperties.get('currentConfigTaskName')
     let taskTemplate = userProperties.get('currentTaskTemplate')
     const {
       parameters: { folderName, folderId },
+      formInput,
     } = this.event
+    const taskName = userProperties.get('currentConfigTaskName')
+      ? userProperties.get('currentConfigTaskName')
+      : formInput['taskName']
     const { variables } = taskTemplate
 
     const response = new DriveModel().createTask(variables, {
