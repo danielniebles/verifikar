@@ -33,7 +33,7 @@ export default class Onboarding extends View {
         actionName:
           this.step !== this.props.totalSteps.toString()
             ? 'nextOnboardingStep'
-            : 'loadTaskList',
+            : 'loadTasksConfigList',
         actionParams: { step: this.step },
       })
     )
