@@ -11,6 +11,8 @@ export default class GmailCompose extends Controller {
     const taskId = name
 
     const taskTemplate = new DriveModel().getTaskTemplate(taskId)
+    userProperties.set('currentTaskTemplate', taskTemplate)
+    userProperties.set('currentTaskId', taskId)
 
     return new GmailComposeView({
       taskTemplate,

@@ -51,7 +51,9 @@ export default class FolderList extends View {
     } else {
       section.addWidget(
         createDecoratedTextWidget({
-          text: 'Lo siento, no se encontró ninguna carpeta con ese nombre',
+          text: this.props.search
+            ? 'Lo siento, no se encontró ninguna carpeta con ese nombre'
+            : 'Utiliza la barra de búsqueda para encontrar tu carpeta',
         })
       )
     }

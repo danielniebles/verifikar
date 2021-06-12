@@ -62,8 +62,20 @@ export function saveTask(event) {
   return new controllers.OnSavedTask({ event }).run()
 }
 
+export function saveGmailComposeTask(event) {
+  return new controllers.OnGmailSavedTask({ event }).run()
+}
+
 export function loadAttachmentList(event) {
-  return new controllers.AttachmentsList({ event }).run()
+  const {
+    parameters: { name },
+  } = event
+  if (name === constant.DRIVE_TASK_NAME) {
+    return new controllers.AttachmentsList({ event }).run()
+  }
+  if (name === constant.GMAIL_COMPOSE_TASK_NAME) {
+    return new controllers.SendEmail({ event }).run()
+  }
 }
 
 export function submitDriveTask(event) {

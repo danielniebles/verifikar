@@ -37,19 +37,14 @@ export default class Drive extends View {
       }
     })
 
-    // section.addWidget(
-    //   createButtonWidget({
-    //     text: this.props.folderName ? 'Guardar' : 'Cancelar',
-    //     styleType: 'FILLED',
-    //     actionName: this.props.folderName ? 'saveTask' : 'loadNextDrive',
-    //     actionParams: this.props.folderName
-    //       ? {
-    //           folderName: this.props.folderName,
-    //           folderId: this.props.folderId,
-    //         }
-    //       : {},
-    //   })
-    // )
+    finalSections[finalSections.length - 1].addWidget(
+      createButtonWidget({
+        text: 'Guardar',
+        styleType: 'FILLED',
+        actionName: 'saveGmailComposeTask',
+        actionParams: {},
+      })
+    )
     return finalSections
   }
 

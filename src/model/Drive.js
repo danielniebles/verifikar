@@ -19,7 +19,8 @@ export default class Drive {
   }
 
   getFoldersByName(folderName) {
-    var folders = DriveApp.getFoldersByName(folderName)
+    //var folders = DriveApp.getFoldersByName(folderName)
+    var folders = DriveApp.searchFolders(`title contains "${folderName}"`)
     const foldersArray = []
     while (folders.hasNext()) {
       var folder = folders.next()
@@ -40,6 +41,7 @@ export default class Drive {
       user,
       variables,
     }
+    console.log(payload)
     const body = {
       method: 'post',
       contentType: 'application/json',

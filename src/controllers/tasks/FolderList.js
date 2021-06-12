@@ -13,9 +13,12 @@ export default class FolderList extends Controller {
 
     taskName ? userProperties.set('currentConfigTaskName', taskName[0]) : ''
 
-    const folders = search
-      ? new DriveModel().getFoldersByName(search)
-      : new DriveModel().getFolderList()
+    // const folders = search
+    //   ? new DriveModel().getFoldersByName(search)
+    //   : new DriveModel().getFolderList()
+
+    const folders = search ? new DriveModel().getFoldersByName(search) : []
+
     return new FolderListView({ search, folders })
   }
   navigateTo(view) {
