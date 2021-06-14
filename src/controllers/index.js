@@ -10,6 +10,7 @@ import AttachmentsList from './AttachmentsList'
 import OnSelectedAttachments from './OnSelectedAttachments'
 import GmailCompose from './compose/GmailCompose'
 import OnGmailSavedTask from './compose/OnGmailSavedTask'
+import OnGmailExecuted from './compose/OnGmailExecuted'
 import SendEmail from './compose/SendEmail'
 
 export default {
@@ -25,5 +26,6 @@ export default {
   OnSelectedAttachments,
   GmailCompose,
   OnGmailSavedTask,
+  OnGmailExecuted,
   SendEmail,
 }

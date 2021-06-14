@@ -1,14 +1,15 @@
-import View from './View'
+import View from '../View'
 import {
-  createSelectionInputWidget,
-  createButtonWidget,
+  createTextInputWidget,
   createButtonSetWidget,
-} from './utils'
+  createButtonWidget,
+} from '../utils'
 
-export default class AttachmentsList extends View {
+export default class GmailEdit extends View {
   get header() {
-    const { parameters } = this.props
-    const { taskName, displayName } = parameters
+    const {
+      parameters: { taskName, displayName },
+    } = this.props
     return CardService.newCardHeader()
       .setTitle(`<b>${taskName}</b>`)
       .setSubtitle(displayName)
@@ -16,24 +17,21 @@ export default class AttachmentsList extends View {
 
   get sections() {
     const section = new CardService.newCardSection()
-    const { attachments, folderId } = this.props
 
     section.addWidget(
-      createSelectionInputWidget({
-        title: 'Selecciona los adjuntos',
-        name: 'selectedAttachments',
-        type: 'CHECK_BOX',
-        options: attachments.map((attachment) => {
-          return { name: attachment.getName() }
-        }),
+      createTextInputWidget({
+        title: 'Mensaje',
+        name: 'message',
+        value: this.props.template,
+        multiline: true,
       })
     )
 
     const submitButton = createButtonWidget({
       text: 'Ejecutar',
       styleType: 'FILLED',
-      actionName: 'submitDriveTask',
-      actionParams: { folderId },
+      actionName: 'submitGmailTask',
+      actionParams: {},
     })
 
     const cancelButton = createButtonWidget({

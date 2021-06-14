@@ -13,6 +13,7 @@ export default class TaskConfigList extends View {
   }
 
   get sections() {
+    console.log('Hi from view')
     const { tasksConfigList } = this.props
     const { plan, usedTask, tasks } = tasksConfigList
     const mainHeader = new CardService.newCardSection().addWidget(

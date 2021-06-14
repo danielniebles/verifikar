@@ -3,7 +3,7 @@ import { createImageWidget, createButtonWidget } from './utils'
 
 export default class WelcomeScreen extends View {
   get currentStep() {
-    return this.props.currentStep
+    return this.props.welcomeScreenStep
   }
   get header() {
     return CardService.newCardHeader().setTitle(' ')

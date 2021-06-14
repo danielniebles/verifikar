@@ -7,6 +7,7 @@ export default class TaskConfigList extends Controller {
   execute() {
     userProperties.remove('currentConfigTaskId')
     userProperties.remove('currentConfigTaskName')
+    userProperties.remove('currentTaskTemplate')
     const tasksConfigList = new TasksConfigListModel().getTasksConfigList()
     return new TaskConfigListView({ tasksConfigList })
   }

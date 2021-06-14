@@ -57,7 +57,13 @@ export function createTextInputWidget({
   return textInput
 }
 
-export function createSelectionInputWidget({ title, name, type, options }) {
+export function createSelectionInputWidget({
+  title,
+  name,
+  type,
+  options,
+  action,
+}) {
   let selectionInput = CardService.newSelectionInput()
     .setFieldName(name)
     .setTitle(title)
@@ -70,7 +76,13 @@ export function createSelectionInputWidget({ title, name, type, options }) {
       : CardService.SelectionInputType.CHECK_BOX
 
   selectionInput.setType(finalType)
-  options.forEach((option) => selectionInput.addItem(option, option, false))
+  if (action) {
+    const { actionName, actionParams } = action
+    selectionInput.setOnChangeAction(createAction(actionName, actionParams))
+  }
+  options.forEach(({ name, selected }) =>
+    selectionInput.addItem(name, name, selected ?? false)
+  )
   return selectionInput
 }
 

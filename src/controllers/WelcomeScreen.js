@@ -1,26 +1,33 @@
 import WelcomeScreenView from '../views/WelcomeScreen'
 import Controller from './Controller'
-import { getNavigationActionResponse } from './navigationHandler'
+import OnboardingModel from '../model/Onboarding'
+import TasksConfigListModel from '../model/TasksConfigList'
+import TaskConfigListView from '../views/TaskConfigList'
 import { getWelcomeImages } from '../model/resources'
 
-export default class extends Controller {
-  execute(currentStep) {
-    const response = getWelcomeImages(`welcome_screen_0${currentStep}`)
-    const { logoUrl, imageMainUrl, imageTextUrl, imageSliderUrl } = response[0]
+export default class WelcomScreen extends Controller {
+  execute(welcomeScreenStep) {
+    const { currentStep, totalSteps } =
+      new OnboardingModel().getOnboardingQuestionsByStep('1', [])
 
-    return new WelcomeScreenView({
-      currentStep,
-      logoUrl,
-      imageMainUrl,
-      imageTextUrl,
-      imageSliderUrl,
-    })
+    if (currentStep === totalSteps) {
+      const tasksConfigList = new TasksConfigListModel().getTasksConfigList()
+      return new TaskConfigListView({ tasksConfigList })
+    } else {
+      const response = getWelcomeImages(`welcome_screen_0${welcomeScreenStep}`)
+      const { logoUrl, imageMainUrl, imageTextUrl, imageSliderUrl } =
+        response[0]
+      return new WelcomeScreenView({
+        welcomeScreenStep,
+        logoUrl,
+        imageMainUrl,
+        imageTextUrl,
+        imageSliderUrl,
+      })
+    }
   }
 
   navigateTo(view) {
-    const card = view.render()
-    return view.props.currentStep === '1'
-      ? card
-      : getNavigationActionResponse(card)
+    return view.render()
   }
 }

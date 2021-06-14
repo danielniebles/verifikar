@@ -7,7 +7,7 @@ export default class TasksConfigList {
     this.httpClient = new HttpClient()
   }
 
-  getTasksConfigList() {
+  static getTasksConfigList() {
     var user = Session.getActiveUser().getEmail()
     const url = formatBackendUrl(`tasks/${user}`)
     const response = this.httpClient.execute(url)

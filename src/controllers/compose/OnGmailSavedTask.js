@@ -8,14 +8,14 @@ export default class OnGmailSavedTask extends Controller {
   execute() {
     let taskTemplate = userProperties.get('currentTaskTemplate')
     const {
-      formInput: { taskName, subject, message },
+      formInput: { taskName, type, template },
     } = this.event
     const { variables } = taskTemplate
 
     const response = new DriveModel().createTask(variables, {
       taskName,
-      subject,
-      message,
+      type,
+      template,
     })
     return new OnSavedTaskView()
   }

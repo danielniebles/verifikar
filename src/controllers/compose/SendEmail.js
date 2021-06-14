@@ -2,11 +2,13 @@ import Controller from '../Controller'
 import Gmail from '../../model/Gmail'
 import TasksHomeModel from '../../model/TasksHome'
 import GmailExecutedView from '../../views/compose/OnGmailExecuted'
+import GmailEditView from '../../views/compose/GmailEdit'
 
 export default class AttachmentsList extends Controller {
   execute() {
     const { messageId, accessToken } = this.messageMetadata
     const {
+      parameters,
       parameters: { name, id },
     } = this.event
 
@@ -14,19 +16,13 @@ export default class AttachmentsList extends Controller {
     const sender = mainMessage.getFrom()
     const taskParameters = new TasksHomeModel().getTaskById(name, id)
 
+    console.log(taskParameters)
+    //mainMessage.reply(template)
     const {
-      parameters: { message, subject },
+      parameters: { template },
     } = taskParameters
 
-    const messageWithSender = message.replace(
-      '${sender}',
-      sender.substring(0, sender.indexOf('<'))
-    )
-    mainMessage.reply(messageWithSender, {
-      subject: subject,
-    })
-
-    return new GmailExecutedView()
+    return new GmailEditView({ parameters, template })
   }
   navigateTo(view) {
     return view.render()

@@ -6,16 +6,24 @@ import { userProperties } from '../../common/properties'
 
 export default class GmailCompose extends Controller {
   execute() {
-    const { parameters } = this.event
+    const { parameters, formInput } = this.event
+    const { type, taskName } = formInput
     const { name } = parameters
     const taskId = name
 
-    const taskTemplate = new DriveModel().getTaskTemplate(taskId)
-    userProperties.set('currentTaskTemplate', taskTemplate)
-    userProperties.set('currentTaskId', taskId)
+    taskName ? userProperties.set('currentConfigTaskName', taskName) : ''
+    let taskTemplate = userProperties.get('currentTaskTemplate')
+
+    if (!taskTemplate) {
+      taskTemplate = new DriveModel().getTaskTemplate(taskId)
+      userProperties.set('currentTaskTemplate', taskTemplate)
+      userProperties.set('currentTaskId', taskId)
+    }
 
     return new GmailComposeView({
       taskTemplate,
+      taskName,
+      type,
     })
   }
 

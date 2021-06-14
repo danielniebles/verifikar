@@ -4,6 +4,7 @@ import {
   createDecoratedTextWidget,
   createButtonWidget,
   createIconImageFromUrl,
+  createSelectionInputWidget,
   colorString,
   getThemeColor,
 } from '../utils'
@@ -17,27 +18,29 @@ export default class Drive extends View {
   }
 
   get sections() {
-    const finalSections = []
+    let section = new CardService.newCardSection()
     const { variables } = this.props.taskTemplate
+
+    if (this.props.type) {
+      variables.forEach((variable) => {
+        if (variable['variableName'] === 'type') {
+          variable['options'].forEach((option) => {
+            option['selected'] =
+              option['name'] === this.props.type ? true : false
+          })
+        }
+      })
+    }
 
     const variablesToRender = variables.filter(
       (variable) => variable['visible'] === true
     )
 
     variablesToRender.forEach((variable) => {
-      if (variable['header']) {
-        let section = new CardService.newCardSection()
-        section.setHeader(colorString(variable['header'], getThemeColor()))
-        section.addWidget(this.createTaskWidgetByType(variable))
-        finalSections.push(section)
-      } else {
-        finalSections[finalSections.length - 1].addWidget(
-          this.createTaskWidgetByType(variable)
-        )
-      }
+      section.addWidget(this.createTaskWidgetByType(variable))
     })
 
-    finalSections[finalSections.length - 1].addWidget(
+    section.addWidget(
       createButtonWidget({
         text: 'Guardar',
         styleType: 'FILLED',
@@ -45,17 +48,24 @@ export default class Drive extends View {
         actionParams: {},
       })
     )
-    return finalSections
+    return section
   }
 
-  createTaskWidgetByType({ type, question, variableName, widget }) {
+  createTaskWidgetByType({ type, question, variableName, widget, options }) {
     const types = {
       text_input: ({ question, variableName }) => {
-        console.log(variableName)
+        return createTextInputWidget({
+          title: question,
+          name: variableName,
+          value: this.props.taskName ?? '',
+        })
+      },
+      text_input_multiple: ({ question, variableName }) => {
         return createTextInputWidget({
           title: question,
           name: variableName,
           multiline: true,
+          value: this.props.type ? this.getTemplate() : null,
         })
       },
       decorated_text: ({ widget }) => {
@@ -64,7 +74,32 @@ export default class Drive extends View {
           text,
         })
       },
+      list_unique_option: ({ question, variableName, options }) => {
+        return createSelectionInputWidget({
+          title: question,
+          name: variableName,
+          type: 'DROPDOWN',
+          options: options,
+          action: {
+            actionName: 'onSelectedTemplate',
+            actionParams: {},
+          },
+        })
+      },
     }
-    return types[type]({ question, variableName, widget })
+    return types[type]({ question, variableName, widget, options })
+  }
+
+  getTemplate() {
+    const { variables } = this.props.taskTemplate
+    const templates = variables.filter(
+      (variable) => variable['variableName'] === 'template'
+    )
+
+    const finalTemplate = templates[0]['options'].filter((template) => {
+      return template['name'] === this.props.type
+    })
+
+    return finalTemplate[0]['message']
   }
 }

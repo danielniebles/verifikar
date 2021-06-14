@@ -82,6 +82,14 @@ export function submitDriveTask(event) {
   return new controllers.OnSelectedAttachments({ event }).run()
 }
 
+export function submitGmailTask(event) {
+  return new controllers.OnGmailExecuted({ event }).run()
+}
+
 export function test(event) {
   return new controllers.FolderList({ event }).run()
+}
+
+export function onSelectedTemplate(event) {
+  return new controllers.GmailCompose({ event }).run()
 }
