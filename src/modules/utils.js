@@ -1,5 +1,11 @@
-import { pickColor } from './Colors'
+import { pickColor } from './colors'
 import { BUTTON_STYLES, SELECTION_TYPES, ICON_SHAPE } from '../common/constants'
+
+const backendUrl = 'https://backend-aq2m3zssnq-ue.a.run.app'
+
+export function formatBackendUrl(pathname) {
+  return `${backendUrl}/${pathname}`
+}
 
 export function createAction(actionName, actionParams) {
   return CardService.newAction()

@@ -1,12 +1,18 @@
-import WelcomeScreenView from '../views/WelcomeScreen'
-import Controller from './Controller'
-import OnboardingService from '../services/Onboarding'
-import TasksConfigurationHomeService from '../services/TasksConfigurationHome'
-import TasksConfigurationHomeView from '../views/TasksConfigurationHome'
-import { getWelcomeImages } from '../model/resources'
+import WelcomeScreenView from '../components/WelcomeScreen'
+import Controller from '../../Common/controllers/Controller'
+import OnboardingService from '../../Onboarding/services/Onboarding'
+import TasksConfigurationHomeService from '../../TasksConfigurationHome/services/TasksConfigurationHome'
+import TasksConfigurationHomeView from '../../TasksConfigurationHome/components/TasksConfigurationHome'
+import { userProperties } from '../../Common/services/properties'
+import { getWelcomeImages } from '../../../model/resources'
+import { CACHE_KEYS } from '../../constants'
 
 export default class WelcomeScreen extends Controller {
   execute(welcomeScreenStep) {
+    userProperties.remove(CACHE_KEYS.CURRENT_CONFIG_TASK_ID)
+    userProperties.remove(CACHE_KEYS.CURRENT_CONFIG_TASK_NAME)
+    userProperties.remove(CACHE_KEYS.CURRENT_TASK_TEMPLATE)
+
     const { currentStep, totalSteps } =
       OnboardingService.getOnboardingQuestionsByStep('1', [])
 

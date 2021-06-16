@@ -1,9 +1,9 @@
-import View from './View'
+import View from '../../Common/components/View'
 import {
   createTextInputWidget,
   createSelectionInputWidget,
   createButtonWidget,
-} from './utils'
+} from '../../utils'
 
 export default class Onboarding extends View {
   get step() {

@@ -1,6 +1,6 @@
-import View from './View'
-import { BUTTON_TEXT, BUTTON_STYLES, HEADERS } from '../common/constants'
-import { createImageWidget, createButtonWidget } from './utils'
+import View from '../../Common/components/View'
+import { BUTTON_TEXT, BUTTON_STYLES, HEADERS } from '../../../common/constants'
+import { createImageWidget, createButtonWidget } from '../../utils'
 
 export default class WelcomeScreen extends View {
   get currentStep() {

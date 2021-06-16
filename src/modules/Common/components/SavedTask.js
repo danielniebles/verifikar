@@ -1,13 +1,13 @@
-import View from '../View'
+import View from './View'
 import {
   createImageWidget,
   createButtonWidget,
   createDecoratedTextWidget,
   colorString,
   getThemeColor,
-} from '../utils'
+} from '../../utils'
 
-export default class OnSavedTask extends View {
+export default class SaveDriveTask extends View {
   get header() {
     return CardService.newCardHeader().setTitle(' ')
   }

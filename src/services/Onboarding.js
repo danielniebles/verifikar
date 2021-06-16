@@ -1,27 +1,23 @@
-import HttpClient from './HttpClient'
+import HttpClient from '../model/HttpClient'
 import { formatBackendUrl } from '../common/utils'
 import { userProperties } from '../common/properties'
 
 export default class Onboarding {
-  constructor() {
-    this.httpClient = new HttpClient()
-  }
-
-  getOnboardingQuestionsByStep(step, formAnswers) {
+  static getOnboardingQuestionsByStep(step, formAnswers) {
+    const httpClient = new HttpClient()
     const body = this.handleOnboardingRequest(step, formAnswers)
     const url = formatBackendUrl('forms')
-    const response = this.httpClient.execute(url, body)
+    const response = httpClient.execute(url, body)
 
-    const { question, previousState, currentStep, totalSteps, id } = JSON.parse(
+    const { question, currentStep, totalSteps, id } = JSON.parse(
       response.getContentText()
     )
-
     userProperties.set('onboardingDocumentId', id)
     userProperties.set('previousQuestion', question)
     return { question, currentStep, totalSteps }
   }
 
-  buildAnsweredQuestion(questions, answers) {
+  static buildAnsweredQuestion(questions, answers) {
     const answeredQuestion = questions.map(({ id, name, value }) => {
       value = answers[name]
       return { id, value }
@@ -29,7 +25,7 @@ export default class Onboarding {
     return answeredQuestion
   }
 
-  handleOnboardingRequest(step, formAnswers) {
+  static handleOnboardingRequest(step, formAnswers) {
     var user = Session.getActiveUser().getEmail()
     if (step === '1') {
       const payload = {

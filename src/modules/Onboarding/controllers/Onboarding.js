@@ -1,10 +1,10 @@
-import Controller from './Controller'
-import OnboardingView from '../views/Onboarding'
+import Controller from '../../Common/controllers/Controller'
+import OnboardingView from '../components/Onboarding'
 import OnboardingService from '../services/Onboarding'
-import { CACHE_KEYS } from '../common/constants'
-import TasksConfigurationHomeService from '../services/TasksConfigurationHome'
-import TasksConfigurationHomeView from '../views/TasksConfigurationHome'
-import { userProperties } from '../common/properties'
+import { CACHE_KEYS } from '../../constants'
+import TasksConfigurationHomeService from '../../TasksConfigurationHome/services/TasksConfigurationHome'
+import TasksConfigurationHomeView from '../../TasksConfigurationHome/components/TasksConfigurationHome'
+import { userProperties } from '../../Common/services/properties'
 
 export default class Onboarding extends Controller {
   execute() {

@@ -1,18 +1,13 @@
-import View from '../View'
+import View from '../../Common/components/View'
 import {
   createTextInputWidget,
   createDecoratedTextWidget,
   createButtonWidget,
   createIconImageFromUrl,
-} from '../utils'
-import {
-  COMMON,
-  BUTTON_TEXT,
-  BUTTON_STYLES,
-  ICON_SHAPE,
-} from '../../common/constants'
+} from '../../utils'
+import { COMMON, BUTTON_TEXT, BUTTON_STYLES, ICON_SHAPE } from '../../constants'
 
-export default class Drive extends View {
+export default class SelectFolder extends View {
   get header() {
     const { displayName } = this.props.taskTemplate
     return CardService.newCardHeader()

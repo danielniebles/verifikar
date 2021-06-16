@@ -1,7 +1,7 @@
 import SignUp from './SignUp'
 import WelcomeScreen from './WelcomeScreen'
 import Onboarding from './Onboarding'
-import TaskConfigList from './TaskConfigList'
+import TasksConfigurationHome from './TasksConfigurationHome'
 import Drive from './tasks/Drive'
 import FolderList from './tasks/FolderList'
 import OnSavedTask from './tasks/OnSavedTask'
@@ -17,7 +17,7 @@ export default {
   SignUp,
   WelcomeScreen,
   Onboarding,
-  TaskConfigList,
+  TasksConfigurationHome,
   Drive,
   FolderList,
   OnSavedTask,

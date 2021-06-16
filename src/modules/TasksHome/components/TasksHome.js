@@ -1,9 +1,9 @@
-import View from './View'
+import View from '../../Common/components/View'
 import {
   createDecoratedTextWidget,
   createIconImageFromUrl,
   createIconImage,
-} from './utils'
+} from '../../utils'
 
 export default class TasksHome extends View {
   get header() {
