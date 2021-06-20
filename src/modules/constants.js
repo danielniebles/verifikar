@@ -9,8 +9,7 @@ export const BUTTON_TEXT = {
   SKIP: 'Omitir',
   NEXT: 'Siguiente',
   SAVE: 'Guardar',
-  CANCEL: 'Cancelar',
-  TEST: 'TEST'
+  CANCEL: 'Cancelar'
 }
 
 export const BUTTON_STYLES = {
