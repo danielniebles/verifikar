@@ -10,6 +10,7 @@ export const BUTTON_TEXT = {
   NEXT: 'Siguiente',
   SAVE: 'Guardar',
   CANCEL: 'Cancelar',
+  TEST: 'TEST'
 }
 
 export const BUTTON_STYLES = {
