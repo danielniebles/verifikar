@@ -17,10 +17,10 @@
     "babel-core": "^7.0.0-bridge.0",
     "copy-webpack-plugin": "^8.1.1",
     "lodash": "^4.17.21",
-    "webpack-cli": "^4.6.0"
+    "webpack-cli": "^4.7.2"
   },
   "scripts": {
-    "build": "webpack & npx clasp push"
+    "build": "npx webpack & npx clasp push"
   },
   "author": "Daniel Niebles",
   "license": "ISC"

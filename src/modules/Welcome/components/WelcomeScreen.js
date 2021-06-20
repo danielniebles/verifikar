@@ -1,5 +1,5 @@
 import View from '../../Common/components/View'
-import { BUTTON_TEXT, BUTTON_STYLES, HEADERS } from '../../../common/constants'
+import { BUTTON_TEXT, BUTTON_STYLES, HEADERS } from '../../constants'
 import { createImageWidget, createButtonWidget } from '../../utils'
 
 export default class WelcomeScreen extends View {

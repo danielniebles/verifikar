@@ -1,6 +1,6 @@
 import 'core-js'
 import controllers from './Common/controllers'
-import * as constant from '../views/Constants'
+import { TASKS } from './constants'
 
 // Context trigger
 export function onContext(event) {
@@ -36,10 +36,10 @@ export function loadTaskConfiguration(event) {
   const {
     parameters: { name },
   } = event
-  if (name === constant.DRIVE_TASK_NAME) {
+  if (name === TASKS.DRIVE_TASK_NAME) {
     return new controllers.SelectFolder({ event }).run()
   }
-  if (name === constant.GMAIL_COMPOSE_TASK_NAME) {
+  if (name === TASKS.GMAIL_COMPOSE_TASK_NAME) {
     return new controllers.SelectTemplate({ event }).run()
   }
 }
@@ -76,10 +76,10 @@ export function loadAttachmentList(event) {
   const {
     parameters: { name },
   } = event
-  if (name === constant.DRIVE_TASK_NAME) {
+  if (name === TASKS.DRIVE_TASK_NAME) {
     return new controllers.AttachmentsList({ event }).run()
   }
-  if (name === constant.GMAIL_COMPOSE_TASK_NAME) {
+  if (name === TASKS.GMAIL_COMPOSE_TASK_NAME) {
     return new controllers.EditTemplate({ event }).run()
   }
 }

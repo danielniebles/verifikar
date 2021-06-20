@@ -1,5 +1,5 @@
 import { pickColor } from './colors'
-import { BUTTON_STYLES, SELECTION_TYPES, ICON_SHAPE } from '../common/constants'
+import { BUTTON_STYLES, SELECTION_TYPES, ICON_SHAPE } from './constants'
 
 const backendUrl = 'https://backend-aq2m3zssnq-ue.a.run.app'
 

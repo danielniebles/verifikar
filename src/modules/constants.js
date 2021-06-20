@@ -29,11 +29,16 @@ export const ICON_SHAPE = {
 
 export const HEADERS = {
   EMPTY: ' ',
-  TASK_CONFIG_HOME: '¿Qué tareas quieres configurar?',
+  TASK_CONFIG_HOME: '¿Qué tareas quieres configurar xdxd?',
 }
 
 export const COMMON = {
   CONFIGURED_TASKS: 'tareas configuradas',
   PLAN: 'Plan',
   CONFIGURATION: 'Configuración',
+}
+
+export const TASKS = {
+  DRIVE_TASK_NAME: 'drive_save_attachament',
+  GMAIL_COMPOSE_TASK_NAME: 'sent_email_from_template'
 }
