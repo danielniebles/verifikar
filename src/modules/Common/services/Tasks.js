@@ -44,6 +44,18 @@ export default class Tasks {
     return JSON.parse(response.getContentText())
   }
 
+  static getTasksByType(name) {
+    const httpClient = new HttpClient()
+    var user = Session.getActiveUser().getEmail()
+    const url = formatBackendUrl(`tasks/${user}/gmail`)
+    const response = httpClient.execute(url)
+    const formatedResponse = JSON.parse(response.getContentText())
+
+    const filteredResponse = formatedResponse.filter((element) => element['name'] === name)
+
+    return filteredResponse
+  }
+
   static getTaskById(name, id) {
     const httpClient = new HttpClient()
     const url = formatBackendUrl(`tasks/id/${id}/${name}`)

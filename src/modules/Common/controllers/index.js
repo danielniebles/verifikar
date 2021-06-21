@@ -7,10 +7,13 @@ import SaveDriveTask from '../../DriveTask/controllers/SaveDriveTask'
 import TasksHome from '../../TasksHome/controllers/TasksHome'
 import AttachmentsList from '../../DriveTask/controllers/AttachmentsList'
 import SubmitDriveTask from '../../DriveTask/controllers/SubmitDriveTask'
-import SelectTemplate from '../../ComposeTask/controllers/SelectTemplate'
-import SaveGmailTask from '../../ComposeTask/controllers/SaveGmailTask'
-import EditTemplate from '../../ComposeTask/controllers/EditTemplate'
-import SubmitGmailTask from '../../ComposeTask/controllers/SubmitGmailTask'
+import SelectTemplate from '../../ReplyTask/controllers/SelectTemplate'
+import SaveGmailTask from '../../ReplyTask/controllers/SaveGmailTask'
+import EditTemplate from '../../ReplyTask/controllers/EditTemplate'
+import SubmitGmailTask from '../../ReplyTask/controllers/SubmitGmailTask'
+import TasksHomeCompose from '../../ComposeTask/controllers/TasksHomeCompose'
+import InsertTemplate from '../../ComposeTask/controllers/InsertTemplate'
+import SubmitComposeTask from '../../ComposeTask/controllers/SubmitComposeTask'
 
 export default {
   WelcomeScreen,
@@ -26,4 +29,7 @@ export default {
   SaveGmailTask,
   EditTemplate,
   SubmitGmailTask,
+  TasksHomeCompose,
+  InsertTemplate,
+  SubmitComposeTask
 }

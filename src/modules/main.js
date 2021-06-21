@@ -2,6 +2,11 @@ import 'core-js'
 import controllers from './Common/controllers'
 import { TASKS } from './constants'
 
+// Compose trigger
+export function onCompose(event) {
+  return new controllers.TasksHomeCompose({ event }).run()
+}
+
 // Context trigger
 export function onContext(event) {
   return new controllers.TasksHome({ event }).run()
@@ -92,4 +97,13 @@ export function submitDriveTask(event) {
 //Gmail
 export function submitGmailTask(event) {
   return new controllers.SubmitGmailTask({ event }).run()
+}
+
+//Executing ComposeTasks
+export function loadComposeTaskMain(event) {
+  return new controllers.InsertTemplate({ event }).run()
+}
+
+export function submitComposeTask(event) {
+  return new controllers.SubmitComposeTask({ event }).run()
 }
